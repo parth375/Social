@@ -13,7 +13,10 @@ return(
         </Join>
         <Sign>Sign In</Sign>
     </Nav>
-    <Section>Section</Section>
+    <Section><Hero>
+        <h1>Communicate Collaborate Connect....</h1>
+        <img src='/images/login.png' alt="pic"/>
+        </Hero></Section>
     </Container>
     </>
 );
@@ -64,6 +67,41 @@ text-align: center;
 }
 `;
 const Section= styled.section`
+      display: flex;
+      align-content: flex-start;
+      min-height: 677px;
+      padding-bottom: 138px;
+      padding-top:40px;
+      padding: 60px 0;
+      position:relative;
+      flex-wrap: wrap;
+      width:100%;
+      max-width: 1228px;
+      margin-top: 50px;
+      align-items: center;
+      @media(max-width:677px) {
+        margin: auto;
+        min-height: 0px;
+      }
+
+`;
+const Hero=styled.div`
+h1{
+    font-size: 60px;
+    font-weight: 200;
+    line-height: 80px;
+    color: white;
+    &:hover{
+     color: #119b5b;
+    text-decoration: none;
+}
+    @media(max-width:677px) {
+        text-align: center;
+        font-size:20px;
+        width: 100%;
+        line-height: 2;
+    }
+}
 `;
 const Img=styled.img`
  width:100%;
