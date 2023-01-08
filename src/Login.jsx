@@ -16,7 +16,14 @@ return(
     <Section><Hero>
         <h1>Communicate Collaborate Connect....</h1>
         <img src='/images/login.png' alt="pic"/>
-        </Hero></Section>
+        </Hero>
+        <Form>
+            <Google>
+                <img src="/images/google.svg" alt="" />
+                Sign in with Google
+            </Google>
+        </Form>
+        </Section>
     </Container>
     </>
 );
@@ -102,7 +109,63 @@ h1{
         line-height: 2;
     }
 }
+img{
+    z-index: -1;
+    width:800px;
+    height: 690px;
+    position:absolute;
+   right:-600px;
+   bottom: -7px;
+  @media (max-width: 677px) {
+    top:230px;
+  width: initial;
+  position: initial;
+  height: initial;
+  }
+  -webkit-animation: mover 1s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+    -webkit-animation: mover 1s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
 `;
+const Form= styled.div`
+margin-top:100px;
+width:400px;
+@media(max-width:677px){
+    margin-top:20px;
+}
+`;
+const Google=styled.button`
+display:flex;
+justify-content: center;
+background-color: #fff;
+align-items: center;
+height: 56px;
+width: 100%;
+margin-top: 30px;
+margin-left:90px;
+border-radius:28px;
+box-shadow: inset 0 0 0 1px rgb(0 0 0 / 60%),inset 0 0 0 2px rgb(0 0 0 / 0%) inset 0 0 0 1px rgb(0 0 0 / 0);
+vertical-align: middle;
+z-index: 0;
+transition-duration:167ms;
+font-size: 20px;
+color:black;
+&:hover{
+  background-color:#119b5b;
+  color:white;
+}
+`;
+
 const Img=styled.img`
  width:100%;
  padding-right:40px;

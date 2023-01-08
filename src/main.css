@@ -1,9 +1,9 @@
 body{
-color: rgb(184, 182, 182);
+color: #b8b6b6;
  background-color: black;
  overflow-y:scroll;
  overflow-x:hidden;
- font-family: Arial, Helvetica, sans-serif;
+ font-family: Arial, Helvetica, sans-serif
 }
 h1,
 h2,
