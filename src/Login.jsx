@@ -43,7 +43,7 @@ const Nav=styled.nav`
     &>a{
         width: 130px;
         height: 40px;
-     @media(max-width: 677px){
+     @media(max-width: 768px){
         display: flex;
         padding-left: 30px;
         padding-top: 20px;
@@ -69,7 +69,7 @@ border-radius: 24px;
 font-weight:600;
 text-align: center;
 &:hover{
-    background-color: #119b5b;
+    background-color: #0ad878;
     color: white;
 }
 `;
@@ -86,7 +86,7 @@ const Section= styled.section`
       max-width: 1228px;
       margin-top: 50px;
       align-items: center;
-      @media(max-width:677px) {
+      @media(max-width:768px) {
         margin: auto;
         min-height: 0px;
       }
@@ -99,10 +99,10 @@ h1{
     line-height: 80px;
     color: white;
     &:hover{
-     color: #119b5b;
+     color: #0ad878;
     text-decoration: none;
 }
-    @media(max-width:677px) {
+    @media(max-width:768px) {
         text-align: center;
         font-size:20px;
         width: 100%;
@@ -111,13 +111,18 @@ h1{
 }
 img{
     z-index: -1;
-    width:800px;
-    height: 690px;
+    width:700px;
+    height: 590px;
     position:absolute;
-   right:-600px;
-   bottom: -7px;
-  @media (max-width: 677px) {
-    top:230px;
+   right:-230px;
+  @media (max-width: 768px) {
+  top:200px;
+  width: initial;
+  position: initial;
+  height: initial;
+  }
+  @media (max-width: 1190px) {
+    top:200px;
   width: initial;
   position: initial;
   height: initial;
@@ -140,7 +145,7 @@ img{
 const Form= styled.div`
 margin-top:100px;
 width:400px;
-@media(max-width:677px){
+@media(max-width:768px){
     margin-top:20px;
 }
 `;
@@ -161,7 +166,7 @@ transition-duration:167ms;
 font-size: 20px;
 color:black;
 &:hover{
-  background-color:#119b5b;
+  background-color:#0ad878;
   color:white;
 }
 `;

@@ -63,10 +63,16 @@ const Header=()=>{
                   <User>
                     <a>
                       <img src="/images\user.svg"/>
-                      <span>ME</span>
+                      <span>Me</span>
                       <img src="/images\down-icon.svg"/>
                     </a>
+                    <SignOut>
+                    <a>
+                      Sign Out
+                    </a>
+                  </SignOut>
                   </User>
+               
                   <Work>
                   <a>
                     <img src="/images/nav-work.svg"/>
@@ -87,7 +93,7 @@ const Container=styled.div`
 background-color: #1d2226;
 border-bottom: 1px solid rgba(0,0,0,0.08);
 left: 0;
-padding: 0 24px;
+padding: 0px 1px 0px 40px;
 position: fixed;
 top:0;
 width: 100vw;
@@ -98,7 +104,7 @@ const Content=styled.div`
 display: flex;
 align-items:center;
 min-height: 100%;
-max-width: 1829px;
+max-width: 1480px;
 `;
 const Logo= styled.span`
 margin-right: 8px;
@@ -145,12 +151,13 @@ align-items: center;
 const Nav=styled.nav`
  margin-left: auto;
 display: block;
- @media(max-width:677px){
+ @media(max-width:500px){
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 100%; 
+  width: 80%; 
  }
+
 `;
 const NavListWrap=styled.ul`
 display:flex;
@@ -166,7 +173,7 @@ list-style-type:none;
       position: absolute;
       transition: transform 0.2s ease-in-out;
       width: 100%;
-      border-color:#119b5b;
+      border-color:#0ad878;
     }
   }
 `;
@@ -193,9 +200,11 @@ a{
     display:flex;
     align-items: center;
   }
-  @media(max-width:677px){
-    min-width: 70px;
+  @media(max-width:768px){
+    min-width: 36px;
   }
+
+ 
 }
 &:hover,
 &:active{
@@ -205,6 +214,21 @@ span{
 }
 }
 }
+`;
+const SignOut=styled.div`
+margin-top:10px;
+margin-left: 10px;
+position:absolute;
+top:45px;
+border-radius: 0 0 5px 5px;
+width:80px;
+height:30px;
+transition-duration:167ms;
+text-align:center;
+display:none;
+color:white;
+background-color: #0ab967;
+
 `;
 const User=styled(NavList)`
 a>svg{
@@ -220,8 +244,16 @@ span{
   display:flex;
   align-items: center;
 }
+&:hover {
+  ${SignOut} { // to select sign Out component
+  align-items:center;
+  display:flex;
+  justify-content: center;
+  }
+}
 `;
 const Work=styled(User)`
- border-left: 1px solid #119b5b;
+ border-left: 1px solid #0ad878;
 `;
+
 export default Header;
