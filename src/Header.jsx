@@ -93,7 +93,7 @@ const Container=styled.div`
 background-color: #1d2226;
 border-bottom: 1px solid rgba(0,0,0,0.08);
 left: 0;
-padding: 0px 1px 0px 40px;
+padding: 0px 0=1px 0px 40px;
 position: fixed;
 top:0;
 width: 100vw;
