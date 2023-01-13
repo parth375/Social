@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components'
 const Login=()=>{
 return(
@@ -175,4 +176,10 @@ const Img=styled.img`
  width:100%;
  padding-right:40px;
 `;
-export default Login;
+const mapStateToProps=(state)=>{
+    return{};
+
+};
+const mapDispatchToProps=(dispatch)=>({});
+
+export default connect(mapStateToProps,mapDispatchToProps)(Login);
