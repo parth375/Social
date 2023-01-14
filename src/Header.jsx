@@ -1,6 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
-const Header=()=>{
+const Header=(props)=>{
        return(
         <>
         <Container>
@@ -75,6 +76,7 @@ const Header=()=>{
                
                   <Work>
                   <a>
+                   
                     <img src="/images/nav-work.svg"/>
                     <span>
                        Work
@@ -255,5 +257,4 @@ span{
 const Work=styled(User)`
  border-left: 1px solid #0ad878;
 `;
-
 export default Header;
