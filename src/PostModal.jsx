@@ -1,10 +1,32 @@
 import { useState } from "react";
 import styled from "styled-components";
+import ReactPlayer from "react-player";
+
 const PostModal=(props)=>{
     const[text,setText]=useState("");
-    const [image,setImage]=useState("");
+    const [Image,setImage]=useState("");
+    const[Video,setVideo]=useState("");
+    const[Item,setItem]=useState("");
+    const handleChange=(e)=>{
+        const image=e.target.files[0];
+        if(image===""||image===undefined){
+            alert(`not an image, the file is a ${typeof image}`);
+            return;
+        }
+        setImage(image);
+    }
+
+    const switchItem=(area)=>{
+        setText("");
+        setImage("")
+        setVideo("");
+        setItem(area);
+    }
     const reset=(e)=>{
         setText("");
+        setImage("")
+        setVideo("");
+        setItem(area);
         props.handleClick(e);
     };
     return(
@@ -25,15 +47,29 @@ const PostModal=(props)=>{
                     <span>Name</span>
                 </UserInfo>
                 <Editor>
-                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="What you want to talk about?" autoFocus={true}></textarea>
+                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="What you want to talk about?" autoFocus={true}/>
+                
+                { Item === "image" ? (
+                <UploadImage>
+                    <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"style={{display:"none"}} onChange={handleChange} />
+                    <p><label htmlFor="file">Select an image to share</label></p>
+                    {Image&& (<img src={URL.createObjectURL(Image)}/>)}
+                    </UploadImage>
+                    ):(
+                        Item==="media" && (
+                    <><input type="text" placeholder="Please input a video link" value={Video} onChange={(e)=>setVideo(e.target.value)}/>
+                    {Video&&(<ReactPlayer width={"100%"}url={Video}/>)}
+                    </>
+                    )
+                 )}
                 </Editor>
             </SharedContent>
             <SharedCreation>
               <Attach>
-                <Asset>
+                <Asset onClick={()=>switchItem("image")}>
                     <img src=""/>
                 </Asset>
-                <Asset>
+                <Asset onClick={()=>switchItem("media")}>
                     <img src=""/>
                 </Asset>
               </Attach>
@@ -178,6 +214,13 @@ input{
     height:35px;
     font-size:16px;
     margin-bottom: 20px;
+}
+`;
+const UploadImage=styled.div`
+text-align:center;
+img{
+    width:50%;
+    height: 80%;
 }
 `;
 export default PostModal;
