@@ -24,7 +24,7 @@ return(
         <img src='/images/login.png' alt="pic"/>
         </Hero>
         <Form>
-            <Google onClick={()=>props.signIn}>
+            <Google onClick={()=>props.signIn()}>
                 <img src="/images/google.svg" alt="" />
                 Sign in with Google
             </Google>
@@ -183,7 +183,7 @@ const Img=styled.img`
 `;
 const mapStateToProps=(state)=>{
     return{
-       
+       user:state.userState.user,
     };
 
 };

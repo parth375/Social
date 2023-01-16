@@ -1,26 +1,16 @@
-import {auth,provider} from "./firebase";
+import {auth, provider} from "./firebase";
 import { SET_USER } from "./actionType";
-export const setUser=(payload)=>({
+export const setUser=(data)=>({
     type:SET_USER,
-    user:payload,
+    user:data,
 });
 export function signInAPI(){
+  return (dispatch)=>{
+    auth
+    .signInWithPopup(provider)
+    .then((data)=>{
+        dispatch(setUser(data.user));
+    }).catch((error)=>alert(error.message));
 
-    return (dispatch)=>{
-        auth.
-        signInWithPopup(provider)
-        .then((payload)=>{
-           console.log(payload);
-        })
-        .catch((error)=>alert(error.message));
-    };
-}
-export function getUserAuth(){
-    return(dispatch)=>{
-        auth.onAuthStateChanged(async(user)=>{
-            if(user){
-                dispatch(setUser(user))
-            }
-        });
-    }
+  }
 }

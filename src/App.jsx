@@ -3,7 +3,6 @@ import Login from './Login';
 import Home from './Home';
 import {BrowserRouter as Router, Routes,Route} from 'react-router-dom';
 import Header from './Header';
-import { getUserAuth } from './action';
 import { connect } from 'react-redux';
 function App(props) {
 return(

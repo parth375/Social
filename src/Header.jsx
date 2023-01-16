@@ -95,18 +95,18 @@ const Container=styled.div`
 background-color: #1d2226;
 border-bottom: 1px solid rgba(0,0,0,0.08);
 left: 0;
-padding: 0px 0=1px 0px 40px;
+padding: 0px 1px 0px 40px;
 position: fixed;
 top:0;
-width: 100vw;
-height:80px;
+width: 109vw;
+height:58px;
 z-index: 100;
 `;
 const Content=styled.div`
 display: flex;
 align-items:center;
 min-height: 100%;
-max-width: 1480px;
+max-width: 1600px;
 `;
 const Logo= styled.span`
 margin-right: 8px;

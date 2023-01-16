@@ -31,6 +31,8 @@ ul
     font-size: 100%;
     vertical-align: baseline;
     background: transparent;
+    zoom: 0.9;
+   
 }
 @-webkit-keyframes fadeIn{
     from{
