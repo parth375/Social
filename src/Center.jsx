@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PostModal from "./PostModal"
 import { connect } from "react-redux";
 import { getArticlesAPI } from "./action";
+import ReactPlayer from "react-player";
 const Center=(props)=>{
     const [showModal,setShowModal]=useState("close");
     useEffect(()=>{
@@ -27,7 +28,7 @@ switch(showModal){
     };
     return(
         <>
-        {props.articles.length===0?
+        {props.articles.length==0?
         <p>There are NO ARTICLES!!!</p>
         :
         <Container>
@@ -69,9 +70,9 @@ switch(showModal){
                     <a>
                         <img src={article.actor.image}/>
                         <div>
-                            <span>Title</span>
-                            <span>Info</span>
-                            <span>Date</span>
+                            <span>{article.actor.title}</span>
+                            <span>{article.actor.description}</span>
+                            <span>{article.actor.date.toDate().toLocaleDateString()}</span>
                         </div>
 
                     </a>
@@ -80,11 +81,14 @@ switch(showModal){
                     </button>
                 </SharedActor>
                 <Description>
-                    Description
+                 {article.description}
                 </Description>
                 <SharedImg>
                     <a>
-                 <img src="/images\img.png"/>
+                {!article.sharedImg&&article.video?<ReactPlayer width={'100%'} url={article.video}/>
+                
+                :
+                (article.sharedImg&&<img src={article.sharedImg}/>)}
                     </a>
                 </SharedImg>
                 <SocialCounts>
