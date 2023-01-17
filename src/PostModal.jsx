@@ -1,7 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import ReactPlayer from "react-player";
-
+import { connect } from "react-redux";
+import firebase from "firebase";
+import { postArticleAPI } from "./action";
 const PostModal=(props)=>{
     const[text,setText]=useState("");
     const [Image,setImage]=useState("");
@@ -15,18 +17,33 @@ const PostModal=(props)=>{
         }
         setImage(image);
     }
-
+  
     const switchItem=(area)=>{
-        setText("");
         setImage("")
         setVideo("");
         setItem(area);
+    };
+const postArticle=(e)=>{
+    e.preventDefault();
+    if(e.target!==e.currentTarget){
+        return;
     }
+const data={
+    image:Image,
+    video:Video,
+    user:props.user,
+    description:text,
+    timestamp:firebase.firestore.Timestamp.now(),
+};
+props.postArticle(data);
+reset(e);
+  };
+   
     const reset=(e)=>{
         setText("");
         setImage("")
         setVideo("");
-        setItem(area);
+        setItem("");
         props.handleClick(e);
     };
     return(
@@ -43,7 +60,9 @@ const PostModal=(props)=>{
             </Header>
             <SharedContent>
                 <UserInfo>
+                    {props.user.photoURL?(<img src={props.user.photoURL}/>):(
                 <img src="/images\user.svg"/>
+            )}
                     <span>Name</span>
                 </UserInfo>
                 <Editor>
@@ -79,7 +98,7 @@ const PostModal=(props)=>{
                     Anyone
                 </Asset>
               </ShareComment>
-              <PostButton disabled={!text?true:false}>
+              <PostButton disabled={!text?true:false} onClick={(event)=>postArticle(event)}>
                 <img width="30px"src="/images\icons8-email-send-48.png"/>
               </PostButton>
             </SharedCreation>
@@ -223,4 +242,12 @@ img{
     height: 80%;
 }
 `;
-export default PostModal;
+const mapStateToProps=(state)=>{
+    return{
+  user:state.userState.user,
+    }
+}
+const mapDispatchToProps=(dispatch)=>({
+    postArticle:(data)=>dispatch(postArticleAPI(data)),
+});
+export default connect(mapStateToProps,mapDispatchToProps)(PostModal);

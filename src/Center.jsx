@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PostModal from "./PostModal"
-const Center=()=>{
+import { connect } from "react-redux";
+import { getArticlesAPI } from "./action";
+const Center=(props)=>{
     const [showModal,setShowModal]=useState("close");
+    useEffect(()=>{
+        props.getArticles();
+    },[]);
     const handleClick=(e)=>{
   e.preventDefault();
 if(e.target!==e.currentTarget){
@@ -22,11 +27,16 @@ switch(showModal){
     };
     return(
         <>
+        {props.articles.length===0?
+        <p>There are NO ARTICLES!!!</p>
+        :
         <Container>
-        <ShareBox>
+        <ShareBox>    
         <div>
+        {props.user&&props.user.photoURL?(<img src={props.user.photoURL}/>):(
         <img src="/images/user.svg"/>
-        <button onClick={handleClick}>Start a post</button>
+        )}
+        <button onClick={handleClick} disabled={props.loading?true:false}>Start a post</button>
         </div>
         <div>
             <button>
@@ -49,11 +59,15 @@ switch(showModal){
             </button>
         </div>
         </ShareBox>
-        <div>
-            <Article>
+        <Content>
+            {props.loading && <img src="/images\Spin-1s-200px.svg"/>}
+             {props.articles.length>0&&
+             props.articles.map((article,key)=>(
+                
+            <Article key={key}>
                 <SharedActor>
                     <a>
-                        <img src="/images\user.svg"/>
+                        <img src={article.actor.image}/>
                         <div>
                             <span>Title</span>
                             <span>Info</span>
@@ -106,9 +120,11 @@ switch(showModal){
                 </button>
                 </SocialActions>
             </Article>
-        </div>
+             ))}
+            </Content>
         <PostModal showModal={showModal} handleClick={handleClick}/>
         </Container>
+}
         </>
     )
 }
@@ -291,4 +307,21 @@ button{
     }
 }
 `;
-export default Center;
+const Content=styled.div`
+  text-align:center;
+  &>img{
+    width:30px;
+  }
+`;
+const mapStateToProps=(state)=>{
+    return{
+        loading:state.articleState.loading,
+        user:state.userState.user,
+        articles:state.articleState.articles,
+    };
+};
+const mapDispatchToProps=(dispatch)=>({
+    getArticles:()=>dispatch(getArticlesAPI()),
+})
+
+export default connect( mapStateToProps,mapDispatchToProps)(Center);
