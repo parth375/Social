@@ -63,15 +63,15 @@ reset(e);
                     {props.user.photoURL?(<img src={props.user.photoURL}/>):(
                 <img src="/images\user.svg"/>
             )}
-                    <span>Name</span>
+                    <span>{props.user.displayName}</span>
                 </UserInfo>
                 <Editor>
-                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="What you want to talk about?" autoFocus={true}/>
+                <textarea value={text} onChange={(e)=>setText(e.target.value)} placeholder="To post anything on the site write in the box and Click on the post button and press Enter!" autoFocus={true}/>
                 
                 { Item === "image" ? (
                 <UploadImage>
-                    <input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"style={{display:"none"}} onChange={handleChange} />
-                    <p><label htmlFor="file">Select an image to share</label></p>
+                    <button><input type="file" accept="image/gif, image/jpeg, image/png" name="image" id="file"style={{display:"none"}} onChange={handleChange} />
+                    <p><label htmlFor="file">Select an image to share</label></p></button>
                     {Image&& (<img src={URL.createObjectURL(Image)}/>)}
                     </UploadImage>
                     ):(
@@ -86,16 +86,16 @@ reset(e);
             <SharedCreation>
               <Attach>
                 <Asset onClick={()=>switchItem("image")}>
-                    <img src=""/>
+                    <img width="35px"src="/images/icons8-image-100.png"/>
                 </Asset>
                 <Asset onClick={()=>switchItem("media")}>
-                    <img src=""/>
+                    <img width="35px"src="/images/icons8-multimedia-64.png"/>
                 </Asset>
               </Attach>
               <ShareComment>
                 <Asset>
-                    <img src=""/>
-                    Anyone
+                    <img width="22px"src="/images\icons8-multiline-text-50.png"/>
+                 
                 </Asset>
               </ShareComment>
               <PostButton disabled={!text?true:false} onClick={(event)=>postArticle(event)}>
@@ -125,7 +125,7 @@ max-width: 552px;
 background-color: #1d2226;
 max-height: 90%;
 overflow: initial;
-border-radius: 5px;
+border-radius: 15px;
 position: relative;
 display:flex;
 flex-direction: column;
@@ -135,10 +135,10 @@ margin: 0 auto;
 const Header=styled.div`
 display: block;
 padding:16px 20px;
-border-bottom: 1px solid rgba(0,0,0,0.15);
+border-bottom: 1px solid #bab9b924;
 font-size:16px;
 line-height: 1.5;
-color:rgba(0,0,0,0.6);
+color:#0ad878;
 font-weight:400;
 display:flex;
 justify-content: space-between;
@@ -172,6 +172,7 @@ const UserInfo=styled.div`
 display: flex;
 align-items: center;
 padding: 12px 24px;
+color:white;
 img{
     width:48px;
     height:48px;
@@ -194,9 +195,12 @@ padding:12px 24px 12px 16px;
 const Asset=styled.button`
 display:flex;
 align-items: center;
+padding-right:40px;
 height: 40px;
 min-width: auto;
 color:rgba(0,0,0,0.5);
+border: none;
+background-color: transparent;
 `;
 const Attach=styled.div`
 align-items: center;
@@ -223,10 +227,14 @@ background: none;
 `;
 const Editor=styled.div`
 padding:12px 24px;
+border-color: #0ad878;
 textarea{
     width:100%;
     min-height: 100px;
     resize: none;
+    color: #0ad878;
+    border-color: white;
+    background-color: #1d2226;
 }
 input{
     width:100%;
@@ -236,10 +244,21 @@ input{
 }
 `;
 const UploadImage=styled.div`
+color:white;
 text-align:center;
 img{
     width:50%;
     height: 80%;
+}
+button{
+    color:white;
+    font-size: medium;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    background-color: #0ad878;
+  
 }
 `;
 const mapStateToProps=(state)=>{

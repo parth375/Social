@@ -1,65 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import News from "./News"
-const RightSide=()=>{
+const News=()=>{
+    const [word,setWord]=useState("News");
+    const [count,setCount]=useState(0);
+  async function getNews(){
+  
+    let response=await fetch("https://official-joke-api.appspot.com/random_joke");
+    let res=await response.json();
+    setWord(res.punchline);
+  }
+  getNews();
     return(
         <>
     <Container>
-    <FollowCard>
    <Title>
-    <h2>Add to your feed</h2>
-    <img src="/images/feed-icon.svg"/>
+    <h2>Social News</h2>
+    <img  src="/images\icons8-rss-48.png"/>
    </Title>
    <FeedList>
-    <li>
-        <a>
-          <Avatar/>  
-       </a>
-        <img width="50px" src="/images\icons8-hashtag-100.png"/>
-        <div>
-          <span>#Linkedin</span>
-        <button>Follow</button>
-        </div>
+   <Report>
+   <li>
+    <p>{word}</p>
     </li>
-    <li>
-        <a>
-            <Avatar/>
-        </a>
-        <img width="50px"  src="/images\icons8-hashtag-100.png"/>
-        <div>
-            <span>#Video</span>
-            <button>Follow</button>
-        </div>
-    </li>
+   </Report>
    </FeedList>
-   <Recommendation>
-    View all recommendations
-    <img src="/images/right-icon.svg"/>
-   </Recommendation>
-   </FollowCard>
-   <BannerCard>
-    <News/>
-   </BannerCard>
-    </Container>
+   </Container>
     </>
     )
 }
 const Container=styled.div`
 grid-area:rightside;
 `;
-const FollowCard=styled.div`
+const Report=styled.div`
 text-align:center;
 overflow: hidden;
 margin-bottom: 8px;
-background-color:#1d2226;
-border-radius: 5px;
-position: relative;
-border:none;
-box-shadow: 0px 1px 2px 0px #088951b1,
-            1px 2px 4px 0px #0e9c5cb1,
-            2px 4px 8px 0px #0eb189b1,
-            2px 4px 16px 0px #0f9583b1;
-padding:12px;
+color:white;
 `;
 const Title=styled.div`
 display: inline-flex;
@@ -68,6 +44,9 @@ justify-content: space-between;
 font-size:16px;
 width:100%;
 color:#fff;
+img{
+    width:35px;
+}
 `;
 const FeedList=styled.ul`
 margin-top: 16px;
@@ -85,7 +64,7 @@ li{
     button{
         background-color:transparent;
         color:white;
-        box-shadow:inset 0 0 0 1px #f1e7e7cd;
+        box-shadow:inset 0 0 0 1px #f1e7e7b0;
         padding:16px;
         align-items:center;
         border-radius: 15px;
@@ -97,16 +76,16 @@ li{
         max-width:480px;
         text-align: center;
         outline: none;
-        
     }
 }
 `;
 const Avatar=styled.div`
- right: 100px;
+background-image:url("icons8-hashtag-100.png");
   background-position: center;
   background-repeat: no-repeat;
   width:38px;
   height:48px;
+  margin-right:8px;
   border-radius: 60%;
 `;
 const Recommendation=styled.a`
@@ -115,10 +94,4 @@ display:flex;
 align-items: center;
 font-size:14px;
 `;
-const BannerCard=styled(FollowCard)`
-img{
-    width:100%;
-    height:100%;
-}
-`;
-export default RightSide;
+export default News;

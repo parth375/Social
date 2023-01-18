@@ -94,8 +94,8 @@ switch(showModal){
                 <SocialCounts>
                     <li>
                         <button>
-                        <img width="20px"src="/images\icons8-positive-feedback-of-thumbs-up-while-syncing-application-28.png"/>
-                        <img width="17px" src="/images\icons8-high-five-64.png"/>
+                        <img width="25px"src="/images\icons8-positive-feedback-of-thumbs-up-while-syncing-application-28.png"/>
+                        <img width="22px" src="/images\icons8-high-five-64.png"/>
                         <span>75</span>
                         </button>
                     </li>
@@ -107,19 +107,19 @@ switch(showModal){
                 </SocialCounts>
                 <SocialActions>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-facebook-like-64.png"/>
                     <span>Like</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-connect-100.png"/>
                     <span>Share</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-chat-bubble-100.png"/>
                     <span>Comment</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-send-64.png"/>
                     <span>Send</span>
                 </button>
                 </SocialActions>
@@ -143,7 +143,10 @@ background-color:#1d2226;
 border-radius: 5px;
 position: relative;
 border:none;
-box-shadow: 0 0 0 1px rgba(0 0 0 /15%) 0 0 0 rgba(0,0,0 /20%);
+box-shadow: 0px 1px 2px 0px #088951b1,
+            1px 2px 4px 0px #0e9c5cb1,
+            2px 4px 8px 0px #0eb189b1,
+            2px 4px 16px 0px #0f9583b1;
 `;
 const ShareBox=styled(CommonCard)`
 padding-top:10px;
@@ -259,6 +262,7 @@ const Description=styled.div`
  overflow:hidden;
  color:white;
  font-size:14px;
+ font-weight: 600;
  text-align:left;
 `;
 const SharedImg=styled.div`
@@ -280,13 +284,13 @@ align-items: flex-start;
 overflow:auto;
 margin:0 16px;
 padding: 8px 0;
-border-bottom: 1px solid white;
+border-bottom: 1px solid grey;
 list-style:none;
 li{
     margin-right:5px;
     font-size:12px;
     button{
-        color: #b8b6b6;
+        color:white;
         background-color:transparent;
         display: flex;
         border: none;
@@ -297,9 +301,12 @@ const SocialActions=styled.div`
 align-items:center;
 display: flex;
 justify-content: flex-start;
-margin:0;
+margin-left:8px;
 min-height: 4px 8px;
 button{
+    background-color:#1d2226;
+    border-radius:12px;
+    border:none;
     display:inline-flex;
     align-items:center;
     padding:8px;
@@ -309,6 +316,7 @@ button{
         margin-left:8px;
         }
     }
+   
 }
 `;
 const Content=styled.div`
