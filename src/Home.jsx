@@ -57,7 +57,7 @@ p{
 const Layout=styled.div`
   display: grid;
   grid-template-areas: "leftside main rightside";
-  grid-template-columns: minmax(0, 5fr) minmax(0, 12fr) minmax(300px, 7fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 10fr) minmax(300px, 7fr);
   column-gap: 25px;
   row-gap: 25px;
   margin: 25px 0;
