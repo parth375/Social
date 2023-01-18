@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import News from "./News"
+import { FcRating } from "react-icons/fc";
 const RightSide=()=>{
     return(
         <>
     <Container>
     <FollowCard>
    <Title>
-    <h2>Add to your feed</h2>
+    <h2><FcRating/>Add to your feed</h2>
     <img src="/images/feed-icon.svg"/>
    </Title>
    <FeedList>

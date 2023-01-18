@@ -57,7 +57,8 @@ return(
 );
 }
 const Container=styled.div`
-padding-right: 60px;
+margin-left: 60px;
+padding-right: 30px;
 grid-area:leftside;
 `;
 const ArtCard=styled.div`
