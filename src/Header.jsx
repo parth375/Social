@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { signOutAPI } from "./action";
 const Header=(props)=>{
        return(
         <>
@@ -63,22 +64,25 @@ const Header=(props)=>{
                   </NavList>
                   <User>
                     <a>
-                      <img src="/images\user.svg"/>
+                      {props.user && props.user.photoURL? (
+                      <img src={props.user.photoURL} alt="dp"/>
+                     ):( <img src="/images\user.svg"/>
+                
+                       )}
                       <span>Me</span>
                       <img src="/images\down-icon.svg"/>
                     </a>
-                    <SignOut>
+                    <SignOut onClick={()=>props.signOut()}>
                     <a>
-                      Sign Out
+                   Sign Out
                     </a>
                   </SignOut>
                   </User>
                
                   <Work>
                   <a>
-                   
-                    <img src="/images/nav-work.svg"/>
-                    <span>
+               <img src="/images/nav-work.svg"/>
+                      <span>
                        Work
                       <img src="/images/down-icon.svg"/>
                     </span>
@@ -95,18 +99,18 @@ const Container=styled.div`
 background-color: #1d2226;
 border-bottom: 1px solid rgba(0,0,0,0.08);
 left: 0;
-padding: 0px 0=1px 0px 40px;
+padding: 0px 1px 0px 40px;
 position: fixed;
 top:0;
-width: 100vw;
-height:80px;
+width: 109vw;
+height:58px;
 z-index: 100;
 `;
 const Content=styled.div`
 display: flex;
 align-items:center;
 min-height: 100%;
-max-width: 1480px;
+max-width: 1600px;
 `;
 const Logo= styled.span`
 margin-right: 8px;
@@ -257,4 +261,12 @@ span{
 const Work=styled(User)`
  border-left: 1px solid #0ad878;
 `;
-export default Header;
+const mapStateToProps=(state)=>{
+  return{
+   user:state.userState.user,
+  }
+};
+const mapDispatchToProps=(dispatch)=>({
+  signOut:()=>dispatch(signOutAPI()),
+});
+export default connect(mapStateToProps,mapDispatchToProps) (Header);

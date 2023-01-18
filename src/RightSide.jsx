@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import News from "./News"
 const RightSide=()=>{
     return(
         <>
@@ -13,9 +14,10 @@ const RightSide=()=>{
     <li>
         <a>
           <Avatar/>  
-        </a>
+       </a>
+        <img width="50px" src="/images\icons8-hashtag-100.png"/>
         <div>
-<span>#Linkedin</span>
+          <span>#Linkedin</span>
         <button>Follow</button>
         </div>
     </li>
@@ -23,6 +25,7 @@ const RightSide=()=>{
         <a>
             <Avatar/>
         </a>
+        <img width="50px"  src="/images\icons8-hashtag-100.png"/>
         <div>
             <span>#Video</span>
             <button>Follow</button>
@@ -35,7 +38,7 @@ const RightSide=()=>{
    </Recommendation>
    </FollowCard>
    <BannerCard>
-    <img src="https://static-exp1.licdn.com/scds/common/u/images/promo/ads/li_evergreen_jobs_ad_300x250_v1.jpg"/>
+    <News/>
    </BannerCard>
     </Container>
     </>
@@ -52,7 +55,10 @@ background-color:#1d2226;
 border-radius: 5px;
 position: relative;
 border:none;
-box-shadow: 0 0 0 1px rgb(0,0,0 /15%), 0 0 0 rgb(0,0,0 /20%);
+box-shadow: 0px 1px 2px 0px #088951b1,
+            1px 2px 4px 0px #0e9c5cb1,
+            2px 4px 8px 0px #0eb189b1,
+            2px 4px 16px 0px #0f9583b1;
 padding:12px;
 `;
 const Title=styled.div`
@@ -79,7 +85,7 @@ li{
     button{
         background-color:transparent;
         color:white;
-        box-shadow:inset 0 0 0 1px #f1e7e7b0;
+        box-shadow:inset 0 0 0 1px #f1e7e7cd;
         padding:16px;
         align-items:center;
         border-radius: 15px;
@@ -91,16 +97,16 @@ li{
         max-width:480px;
         text-align: center;
         outline: none;
+        
     }
 }
 `;
 const Avatar=styled.div`
-background-image:url("icons8-hashtag-100.png");
+ right: 100px;
   background-position: center;
   background-repeat: no-repeat;
   width:38px;
   height:48px;
-  margin-right:8px;
   border-radius: 60%;
 `;
 const Recommendation=styled.a`

@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PostModal from "./PostModal"
-const Center=()=>{
+import { connect } from "react-redux";
+import { getArticlesAPI } from "./action";
+import ReactPlayer from "react-player";
+const Center=(props)=>{
     const [showModal,setShowModal]=useState("close");
+    useEffect(()=>{
+        props.getArticles();
+    },[]);
     const handleClick=(e)=>{
   e.preventDefault();
 if(e.target!==e.currentTarget){
@@ -22,11 +28,16 @@ switch(showModal){
     };
     return(
         <>
+        {props.articles.length==0?
+        <p>There are NO ARTICLES!!!</p>
+        :
         <Container>
-        <ShareBox>
+        <ShareBox>    
         <div>
+        {props.user&&props.user.photoURL?(<img src={props.user.photoURL}/>):(
         <img src="/images/user.svg"/>
-        <button onClick={handleClick}>Start a post</button>
+        )}
+        <button onClick={handleClick} disabled={props.loading?true:false}>Start a post</button>
         </div>
         <div>
             <button>
@@ -49,15 +60,19 @@ switch(showModal){
             </button>
         </div>
         </ShareBox>
-        <div>
-            <Article>
+        <Content>
+            {props.loading && <img src="/images\Spin-1s-200px.svg"/>}
+             {props.articles.length>0&&
+             props.articles.map((article,key)=>(
+                
+            <Article key={key}>
                 <SharedActor>
                     <a>
-                        <img src="/images\user.svg"/>
+                        <img src={article.actor.image}/>
                         <div>
-                            <span>Title</span>
-                            <span>Info</span>
-                            <span>Date</span>
+                            <span>{article.actor.title}</span>
+                            <span>{article.actor.description}</span>
+                            <span>{article.actor.date.toDate().toLocaleDateString()}</span>
                         </div>
 
                     </a>
@@ -66,18 +81,21 @@ switch(showModal){
                     </button>
                 </SharedActor>
                 <Description>
-                    Description
+                 {article.description}
                 </Description>
                 <SharedImg>
                     <a>
-                 <img src="/images\img.png"/>
+                {!article.sharedImg&&article.video?<ReactPlayer width={'100%'} url={article.video}/>
+                
+                :
+                (article.sharedImg&&<img src={article.sharedImg}/>)}
                     </a>
                 </SharedImg>
                 <SocialCounts>
                     <li>
                         <button>
-                        <img width="20px"src="/images\icons8-positive-feedback-of-thumbs-up-while-syncing-application-28.png"/>
-                        <img width="17px" src="/images\icons8-high-five-64.png"/>
+                        <img width="25px"src="/images\icons8-positive-feedback-of-thumbs-up-while-syncing-application-28.png"/>
+                        <img width="22px" src="/images\icons8-high-five-64.png"/>
                         <span>75</span>
                         </button>
                     </li>
@@ -89,26 +107,28 @@ switch(showModal){
                 </SocialCounts>
                 <SocialActions>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-facebook-like-64.png"/>
                     <span>Like</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-connect-100.png"/>
                     <span>Share</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-chat-bubble-100.png"/>
                     <span>Comment</span>
                 </button>
                 <button>
-                    <img/>
+                    <img width="25px" src="/images\icons8-send-64.png"/>
                     <span>Send</span>
                 </button>
                 </SocialActions>
             </Article>
-        </div>
+             ))}
+            </Content>
         <PostModal showModal={showModal} handleClick={handleClick}/>
         </Container>
+}
         </>
     )
 }
@@ -123,7 +143,10 @@ background-color:#1d2226;
 border-radius: 5px;
 position: relative;
 border:none;
-box-shadow: 0 0 0 1px rgba(0 0 0 /15%) 0 0 0 rgba(0,0,0 /20%);
+box-shadow: 0px 1px 2px 0px #088951b1,
+            1px 2px 4px 0px #0e9c5cb1,
+            2px 4px 8px 0px #0eb189b1,
+            2px 4px 16px 0px #0f9583b1;
 `;
 const ShareBox=styled(CommonCard)`
 padding-top:10px;
@@ -239,6 +262,7 @@ const Description=styled.div`
  overflow:hidden;
  color:white;
  font-size:14px;
+ font-weight: 600;
  text-align:left;
 `;
 const SharedImg=styled.div`
@@ -260,13 +284,13 @@ align-items: flex-start;
 overflow:auto;
 margin:0 16px;
 padding: 8px 0;
-border-bottom: 1px solid white;
+border-bottom: 1px solid grey;
 list-style:none;
 li{
     margin-right:5px;
     font-size:12px;
     button{
-        color: #b8b6b6;
+        color:white;
         background-color:transparent;
         display: flex;
         border: none;
@@ -277,9 +301,12 @@ const SocialActions=styled.div`
 align-items:center;
 display: flex;
 justify-content: flex-start;
-margin:0;
+margin-left:8px;
 min-height: 4px 8px;
 button{
+    background-color:#1d2226;
+    border-radius:12px;
+    border:none;
     display:inline-flex;
     align-items:center;
     padding:8px;
@@ -289,6 +316,24 @@ button{
         margin-left:8px;
         }
     }
+   
 }
 `;
-export default Center;
+const Content=styled.div`
+  text-align:center;
+  &>img{
+    width:30px;
+  }
+`;
+const mapStateToProps=(state)=>{
+    return{
+        loading:state.articleState.loading,
+        user:state.userState.user,
+        articles:state.articleState.articles,
+    };
+};
+const mapDispatchToProps=(dispatch)=>({
+    getArticles:()=>dispatch(getArticlesAPI()),
+})
+
+export default connect( mapStateToProps,mapDispatchToProps)(Center);

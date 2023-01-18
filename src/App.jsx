@@ -3,10 +3,14 @@ import Login from './Login';
 import Home from './Home';
 import {BrowserRouter as Router, Routes,Route} from 'react-router-dom';
 import Header from './Header';
-import { getUserAuth } from './action';
 import { connect } from 'react-redux';
+import { getUserAuth } from './action';
 function App(props) {
+  useEffect(()=>{
+    props.getAuth();
+  },[]);
 return(
+ 
   <>
  <Router>
   <Routes>
@@ -17,10 +21,10 @@ return(
   </>
   );
 }
-// const mapStateToProps=(state)=>{
-//   return {};
-// };
-// const mapDispatchToProps=(dispatch)=>({
-//   getUserAuth:()=>dispatch(getUserAuth()),
-// });
- export default (App);
+const mapStateToProps=(state)=>{
+  return {};
+};
+const mapDispatchToProps=(dispatch)=>({
+  getAuth:()=>dispatch(getUserAuth()),
+});
+ export default connect(mapStateToProps,mapDispatchToProps,)(App);
