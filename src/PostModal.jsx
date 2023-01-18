@@ -252,7 +252,6 @@ img{
 }
 button{
     color:white;
-    font-size: medium;
     font-weight: 600;
     border: none;
     border-radius: 10px;
